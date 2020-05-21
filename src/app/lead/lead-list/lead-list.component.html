@@ -1,0 +1,62 @@
+<section class="section">
+  <div class="container-fluid">
+    <div class="four-space"></div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-11 col-xs-12">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h2 class="card-title">All Cases</h2>
+            <p class="card-category">List of all cases provided by you and their status's.</p>
+          </div>
+          <div class="card-body">
+            <div class="space"></div>
+            <div class="table-responsive table-full-width">
+              <mat-table class="table " matSort [dataSource]="allLeads" *ngIf="allLeads.data">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.leadId }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="mobile">
+                  <mat-header-cell *matHeaderCellDef>Mobile</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.phone }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.status }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="policy type">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Policy Type</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.policyTypeId.name }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="complaint type">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Complaint Type</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.complaintTypeId.name }}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+              </mat-table>
+
+              <div class="paginator" *ngIf="allLeads.data">
+                <mat-paginator [pageSizeOptions]="[1, 5, 10]" showFirstLastButtons></mat-paginator>
+              </div>
+
+            </div>
+            <div class="no-case d-flex justify-content-center" *ngIf="!allLeads.data">
+              <h2>It seems that we don't have any case submitted by you.</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

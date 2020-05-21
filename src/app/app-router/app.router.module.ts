@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { LayoutComponent } from '../components/layout/layout.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
 
 const route: Routes = [
   { path: '', redirectTo: 'auth/signup', pathMatch: 'full' },
@@ -13,7 +13,9 @@ const route: Routes = [
     component: LayoutComponent,
     loadChildren: 'src/app/components/components.module#ComponentsModule',
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 
 @NgModule({

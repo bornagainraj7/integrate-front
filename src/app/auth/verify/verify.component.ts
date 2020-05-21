@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class VerifyComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +26,8 @@ export class VerifyComponent implements OnInit {
 
     if (this.token) {
       this.authService.verifyUser(this.token);
+    } else {
+      this.router.navigate(['/auth/login']);
     }
   }
 

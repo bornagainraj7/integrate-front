@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,8 +15,14 @@ export class NavbarComponent implements OnInit {
   mobileMenuVisible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
+  public name;
 
-  constructor(location: Location, private element: ElementRef, private router: Router) {
+  constructor(
+    location: Location,
+    private element: ElementRef,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.location = location;
     this.sidebarVisible = false;
   }
@@ -32,6 +39,8 @@ export class NavbarComponent implements OnInit {
         this.mobileMenuVisible = 0;
       }
     });
+
+    this.name = this.authService.getName();
   }
 
   sidebarOpen() {

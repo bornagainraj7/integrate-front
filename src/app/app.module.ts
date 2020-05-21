@@ -11,6 +11,8 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { LeadModule } from './lead/lead.module';
+import { ErrorInterceptor } from './auth/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     RouterModule,
     SharedModule,
     AuthModule,
+    LeadModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -33,6 +36,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

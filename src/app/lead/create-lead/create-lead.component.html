@@ -1,0 +1,101 @@
+<section class="section">
+  <div class="four-space"></div>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8 col-xs-10">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h2 class="card-title">Submit New Case</h2>
+            <p class="card-category">Provide us the details of your new Insurace case you'll like to submit us.</p>
+          </div>
+          <div class="card-body">
+            <div class="space"></div>
+
+            <form (submit)="onCreateLead(newLeadForm)" #newLeadForm="ngForm">
+              <div class="row d-flex justify-content-around">
+
+                <div class="col-md-5 col-xs-10">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Policy Holder's Name</mat-label>
+                      <input matInput type="text" name="name" ngModel #nameInput="ngModel" placeholder="Name" required>
+                      <mat-error *ngIf="nameInput.hasError('required')">Policy Holder's Name is required to login
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Policy Holder's Email</mat-label>
+                      <input type="email" name="email" ngModel #emailInput="ngModel" matInput placeholder="Email Id"
+                        required email>
+                      <mat-error *ngIf="emailInput.hasError('required')">Policy Holder's email is required</mat-error>
+                      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-group" *ngIf="allInsCompanies">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Complaint Type: </mat-label>
+                      <mat-select name="complaintTypeId" ngModel #comTypeInput="ngModel" toggle="onToggle($event)"
+                        required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let comp of allComplaintTypes" [value]="comp._id">{{ comp.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="comTypeInput.hasError('required')">Complaint type is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+                <div class="col-md-5 col-xs-10">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Policy Holder's Mobile</mat-label>
+                      <input type="tel" name="phone" ngModel #phoneInput="ngModel" matInput placeholder="Mobile Number"
+                        (keypress)="keyPress($event)" maxlength=10 minlength=10 required>
+                      <mat-hint align="end">{{phoneInput.value?.length}}/10</mat-hint>
+                      <mat-error>Mobile number should be 10 characters long</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-group" *ngIf="allInsCompanies">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Insurance Company Name: </mat-label>
+                      <mat-select name="companyId" ngModel #insCompInput="ngModel" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let insComp of allInsCompanies" [value]="insComp._id">{{ insComp.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="insCompInput.hasError('required')">Insurance Company Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-group" *ngIf="allInsCompanies">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Policy Type: </mat-label>
+                      <mat-select name="policyTypeId" ngModel #policyTypeInput="ngModel" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let policy of allPolicyTypes" [value]="policy._id">{{ policy.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="policyTypeInput.hasError('required')">Policy type is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <button mat-raised-button type="submit" class="btn-success" [disabled]="newLeadForm.invalid">Submit
+                Case</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="four-space"></div>
+</section>

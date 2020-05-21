@@ -6,10 +6,12 @@ declare interface RouteInfo {
   path: string;
   title: string;
   icon: string;
-  class: string;
+  class?: string;
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/portal/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/portal/lead/create', title: 'New Case', icon: 'post_add', class: '' },
+  { path: '/portal/lead/list', title: 'All Cases', icon: 'list_alt', class: '' },
   { path: '/user-profile', title: 'User Profile', icon: 'person', class: '' },
   // { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
   // { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },

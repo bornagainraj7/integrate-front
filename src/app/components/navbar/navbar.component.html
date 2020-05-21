@@ -3,13 +3,13 @@
     <div class="navbar-wrapper">
       <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
     </div>
-    <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
+    <button class="navbar-toggler" type="button" (click)="sidebarToggle()">
       <span class="sr-only">Toggle navigation</span>
       <span class="navbar-toggler-icon icon-bar"></span>
       <span class="navbar-toggler-icon icon-bar"></span>
       <span class="navbar-toggler-icon icon-bar"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+    <!-- <div class="collapse navbar-collapse justify-content-end" id="navigation">
       <form class="navbar-form">
         <div class="input-group no-border">
           <input type="text" value="" class="form-control" placeholder="Search...">
@@ -53,6 +53,12 @@
           </a>
         </li>
       </ul>
+    </div> -->
+
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      <button class="name-button" mat-stroked-button>
+        <i class="material-icons">person</i> {{ name }}
+      </button>
     </div>
   </div>
 </nav>
