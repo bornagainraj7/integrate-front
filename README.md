@@ -1,5 +1,8 @@
 # Integrate
 
+1. After taking a pull from the repo be sure to do npm insatll inside repo.
+2. Install Prettier, Eslint, Tslint, EditorConfig, and also try to install Angular Language Service and Angular Snippets (by John Papa) inside your vscode.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
 
 ## Development server
