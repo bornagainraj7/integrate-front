@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+/* font-family: 'Source Sans Pro', sans-serif; */
+/* font-family: 'Roboto', sans-serif; */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+section {
+  margin-left: auto;
+  margin-right: auto;
+}
+.text-center {
+  margin: auto;
+  text-align: center;
+}
+.space {
+  width: 100%;
+  height: 40px;
+}
+.two-space {
+  width: 100%;
+  height: 80px;
+}
+.three-space {
+  width: 100%;
+  height: 120px;
+}
+.four-space {
+  width: 100%;
+  height: 160px;
+}
+.pointer {
+  cursor: pointer !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Source Sans Pro', sans-serif;
+}

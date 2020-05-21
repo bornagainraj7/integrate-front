@@ -1,0 +1,12 @@
+<div class="wrapper" *ngIf="isAuthenticated">
+  <div *ngIf="isAuthenticated" class="sidebar" data-color="azure" data-background-color="white"
+    data-image="./assets/img/sidebar-1.jpg">
+    <app-sidebar *ngIf="isAuthenticated"></app-sidebar>
+    <div *ngIf="isAuthenticated" class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)">
+    </div>
+  </div>
+  <div *ngIf="isAuthenticated" class="main-panel">
+    <app-navbar *ngIf="isAuthenticated"></app-navbar>
+    <router-outlet *ngIf="isAuthenticated"></router-outlet>
+  </div>
+</div>
