@@ -11,7 +11,8 @@
           <div class="card-body">
             <div class="space"></div>
             <div class="table-responsive table-full-width">
-              <mat-table class="table " matSort [dataSource]="allLeads" *ngIf="allLeads.data">
+              <mat-table class="table " matSort (matSortChange)="sortData($event)" [dataSource]="allLeads"
+                *ngIf="allLeads.data">
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
                   <mat-cell *matCellDef="let element">{{ element.leadId }}</mat-cell>
@@ -47,7 +48,8 @@
               </mat-table>
 
               <div class="paginator" *ngIf="allLeads.data">
-                <mat-paginator [pageSizeOptions]="[1, 5, 10]" showFirstLastButtons></mat-paginator>
+                <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="pageLength" [pageSize]="pageSize"
+                  (page)="pageEvent($event)" showFirstLastButtons></mat-paginator>
               </div>
 
             </div>

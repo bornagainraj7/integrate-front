@@ -26,6 +26,7 @@ export class LeadService {
   private policyTypesList = new Subject<any[]>();
   private complaintTypesList = new Subject<any[]>();
 
+
   constructor(
     private http: HttpClient,
     private toast: ToastMessageService,
@@ -108,8 +109,8 @@ export class LeadService {
       });
   }
 
-  fetchAllUserLeads() {
-    this.http.get<ResponseData>(`${this.baseUrl}/get`)
+  fetchAllUserLeads(page, size) {
+    this.http.get<ResponseData>(`${this.baseUrl}/get?page=${page}&size=${size}`)
       .subscribe((response) => {
         if (!response.error) {
           this.allUserLeads = response.data;
@@ -120,6 +121,11 @@ export class LeadService {
       }, (error) => {
         console.log(error.error);
       });
+  }
+
+
+  fetchLeadsCount() {
+    return this.http.get<ResponseData>(`${this.baseUrl}/count`);
   }
 
 
