@@ -1,0 +1,167 @@
+<section class="section">
+  <div class="four-space"></div>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6 col-xs-10">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h2 class="card-title">Upload Documents</h2>
+            <div class="card-category">Upload necessary documents for the lead so that our experts can evaluate your
+              case.</div>
+          </div>
+          <div class="card-body" *ngIf="leadData">
+            <h4 class="text-center">ID: {{ leadData.leadId }}</h4>
+            <h2 class="text-center">Already uploaded documents: </h2>
+            <p *ngFor="let doc of leadData.doc">
+              <a target="_blank" href="{{ baseUrl }}/uploads/lead_documents/{{ userId }}/{{ leadId }}/{{ doc }}">
+                {{ doc }}
+              </a>
+            </p>
+            <hr>
+            <!-- General Insurance Form -->
+            <form (submit)="generalSubmit(generalForm)" #generalForm="ngForm"
+              *ngIf="policyType === 'General Insurance'">
+              <div class="form-group ">
+                <label>Policy Book <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="policyBook" class="btn btn-outline-primary">Choose File</label>&nbsp; &nbsp;
+                <input type="file" ngModel id="policyBook" #policyBook="ngModel" name="policyBook"
+                  (change)="onImagePickedGeneral($event)" required>
+                <p class="text-danger" *ngIf="policyBook.invalid && (policyBook.dirty || policyBook.touched)">
+                  Policy book is required</p>
+                <p>{{ generalInsurance.policyBook }}</p>
+              </div>
+
+              <div class="form-group ">
+                <label>Rejection Letter <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="rejectionLetter" class="btn btn-outline-primary">Choose File</label>&nbsp; &nbsp;
+                <input type="file" ngModel id="rejectionLetter" #rejectionLetter="ngModel" name="rejectionLetter"
+                  (change)="onImagePickedGeneral($event)" required>
+                <p class="text-danger"
+                  *ngIf="rejectionLetter.invalid && (rejectionLetter.dirty || rejectionLetter.touched)">
+                  Rejection Letter is required</p>
+                <p>{{ generalInsurance.rejectionLetter }}</p>
+              </div>
+
+              <div class="form-group ">
+                <label>Claim Bill <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="claimBill" class="btn btn-outline-primary">Choose File</label>&nbsp; &nbsp;
+                <input type="file" ngModel id="claimBill" #claimBill="ngModel" name="claimBill"
+                  (change)="onImagePickedGeneral($event)" required>
+                <p class="text-danger" *ngIf="claimBill.invalid && (claimBill.dirty || claimBill.touched)">
+                  Claim Bill is required</p>
+                <p>{{ generalInsurance.claimBill }}</p>
+              </div>
+
+              <div class="form-group ">
+                <label>Surveyor Report <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="surveyorReport" class="btn btn-outline-primary">Choose File</label>&nbsp; &nbsp;
+                <input type="file" ngModel id="surveyorReport" #surveyorReport="ngModel" name="surveyorReport"
+                  (change)="onImagePickedGeneral($event)" required>
+                <p class="text-danger"
+                  *ngIf="surveyorReport.invalid && (surveyorReport.dirty || surveyorReport.touched)">
+                  Policy book is required</p>
+                <p>{{ generalInsurance.surveyorReport }}</p>
+              </div>
+
+              <hr>
+              <button mat-raised-button class="btn-primary" type="button" (click)="openModal($event)">Add More
+                Documents</button>
+              &nbsp; &nbsp;
+              <button mat-raised-button class="btn-success" type="submit" [disabled]="generalForm.invalid">Submit
+                Documents</button>
+            </form>
+
+            <!-- Life Insurance Form -->
+            <form (submit)="lifeSubmit(lifeForm)" #lifeForm="ngForm" *ngIf="policyType === 'Life Insurance'">
+              <div class="form-group">
+                <label>Policy Schedule <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="policySchedule" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel id="policySchedule" #policySchedule="ngModel" name="policySchedule"
+                  (change)="onImagePickedLife($event)" required>
+                <p class="text-danger"
+                  *ngIf="policySchedule.invalid && (policySchedule.dirty || policySchedule.touched)">
+                  Policy Schedule is required</p>
+                <p>{{ lifeInsurance.policySchedule }}</p>
+              </div>
+
+              <div class="form-group">
+                <label>Email Exchange <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="emailExchange" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel id="emailExchange" #emailExchange="ngModel" name="emailExchange"
+                  (change)="onImagePickedLife($event)" required>
+                <p class="text-danger" *ngIf="emailExchange.invalid && (emailExchange.dirty || emailExchange.touched)">
+                  Policy Schedule is required</p>
+                <p>{{ lifeInsurance.emailExchange }}</p>
+              </div>
+
+              <hr>
+              <button mat-raised-button class="btn-primary" type="button" (click)="openModal($event)">Add More
+                Documents</button>
+              &nbsp; &nbsp;
+              <button mat-raised-button class="btn-success" type="submit" [disabled]="lifeForm.invalid">Submit
+                Documents</button>
+            </form>
+
+            <!-- Health Insurance Form -->
+            <form #healthForm="ngForm" (submit)="healthSubmit(healthForm)" *ngIf="policyType === 'Health Insurance'">
+              <div class="form-group">
+                <label>Discharge Summary <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="dischargeSummary" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel #dischargeSummary="ngModel" id="dischargeSummary" name="dischargeSummary"
+                  (change)="onImagePickedHealth($event)" required>
+                <p class="text-danger"
+                  *ngIf="dischargeSummary.invalid && (dischargeSummary.dirty || dischargeSummary.touched)">
+                  Discharge Summary is required
+                </p>
+                <p>{{ healthInsurance.dischargeSummary }}</p>
+              </div>
+
+              <div class="form-group">
+                <label>Rejection Letter <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="rejectionLetter" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel #rejectionLetter="ngModel" id="rejectionLetter" name="rejectionLetter"
+                  (change)="onImagePickedHealth($event)" required>
+                <p class="text-danger"
+                  *ngIf="rejectionLetter.invalid && (rejectionLetter.dirty || rejectionLetter.touched)">
+                  Rejection Letter is required
+                </p>
+                <p>{{ healthInsurance.rejectionLetter }}</p>
+              </div>
+
+              <div class="form-group">
+                <label>Claim Bill <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="claimBill" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel #claimBill="ngModel" id="claimBill" name="claimBill"
+                  (change)="onImagePickedHealth($event)" required>
+                <p class="text-danger" *ngIf="claimBill.invalid && (claimBill.dirty || claimBill.touched)">
+                  Claim Bill is required
+                </p>
+                <p>{{ healthInsurance.claimBill }}</p>
+              </div>
+
+              <div class="form-group">
+                <label>Discharge Document <span class="text-danger">*</span></label>&nbsp; &nbsp;
+                <label for="dischargeDocument" class="btn btn-outline-primary">Choose File</label>
+                <input type="file" ngModel #dischargeDocument="ngModel" id="dischargeDocument" name="dischargeDocument"
+                  (change)="onImagePickedHealth($event)" required>
+                <p class="text-danger"
+                  *ngIf="dischargeDocument.invalid && (dischargeDocument.dirty || dischargeDocument.touched)">
+                  Discharge Document is required
+                </p>
+                <p>{{ healthInsurance.dischargeDocument }}</p>
+              </div>
+
+              <hr>
+              <button mat-raised-button class="btn-primary" type="button" (click)="openModal($event)">Add More
+                Documents</button>
+              &nbsp; &nbsp;
+              <button mat-raised-button class="btn-success" type="submit" [disabled]="healthForm.invalid">Submit
+                Documents</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="three-space"></div>
+</section>

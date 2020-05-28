@@ -1,0 +1,12 @@
+.logo-img {
+  padding: 5px 10px;
+  width: 100%;
+  margin-right: 0px;
+}
+
+.logo-img img {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}

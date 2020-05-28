@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -15,6 +18,8 @@ import { MatSortModule } from '@angular/material/sort';
   imports: [],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
@@ -22,8 +27,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatIconModule,
   ],
 })
 export class SharedModule { }

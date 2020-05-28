@@ -12,7 +12,7 @@ import { ToastMessageService } from '../toastr.service';
 })
 export class AuthService {
 
-  private baseUrl = `${environment.baseUrl}/auth`;
+  private baseUrl = `${environment.baseUrl}/api/v1/auth`;
 
   private token;
   private userId;
@@ -152,29 +152,29 @@ export class AuthService {
   verifyUser(token) {
     this.http.get<ResponseData>(`${this.baseUrl}/verify/${token}`)
       .subscribe((response) => {
-        if (!response.error) {
-          this.userData = response.data;
-          this.token = response.data.token;
-          this.token = this.userData.token;
-          this.userId = this.userData._id;
-          this.email = this.userData.email;
-          this.name = this.userData.name;
+        // if (!response.error) {
+        //   this.userData = response.data;
+        //   this.token = response.data.token;
+        //   this.token = this.userData.token;
+        //   this.userId = this.userData._id;
+        //   this.email = this.userData.email;
+        //   this.name = this.userData.name;
 
-          this.isAuthenticated = true;
-          this.authStatusList.next(true);
+        //   this.isAuthenticated = true;
+        //   this.authStatusList.next(true);
 
-          const expiresIn = Date.now() - this.userData.tokenExpiry;
-          this.setAuthTimer(expiresIn / 1000);
-          const expiryDuration = new Date(this.userData.tokenExpiry);
+        //   const expiresIn = Date.now() - this.userData.tokenExpiry;
+        //   this.setAuthTimer(expiresIn / 1000);
+        //   const expiryDuration = new Date(this.userData.tokenExpiry);
 
-          localStorage.setItem('token', this.token);
-          localStorage.setItem('name', this.name);
-          localStorage.setItem('userId', this.userId);
-          localStorage.setItem('email', this.email);
-          localStorage.setItem('expiry', expiryDuration.toISOString());
+        //   localStorage.setItem('token', this.token);
+        //   localStorage.setItem('name', this.name);
+        //   localStorage.setItem('userId', this.userId);
+        //   localStorage.setItem('email', this.email);
+        //   localStorage.setItem('expiry', expiryDuration.toISOString());
 
-          this.router.navigate(['/portal/dashboard']);
-        }
+        //   this.router.navigate(['/portal/dashboard']);
+        // }
         this.toastService.toastSuccess(response.message);
       }, (error) => {
         this.toastService.toastError(error.error.message);
@@ -183,21 +183,21 @@ export class AuthService {
   }
 
   logout() {
-    this.token = null;
-    this.isAuthenticated = false;
-    this.email = null;
-    this.userId = null;
-    this.name = null;
-    this.authStatusList.next(false);
-    localStorage.clear();
-    clearTimeout(this.tokenTimer);
-    this.router.navigate(['/auth/login']);
-    this.toastService.toastSuccess('You\'ve successfully logged out');
     this.http.get<ResponseData>(`${this.baseUrl}/logout`)
       .subscribe((response) => {
       }, (error) => {
         console.log(error.error);
       });
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatusList.next(false);
+    this.email = null;
+    this.userId = null;
+    this.name = null;
+    localStorage.clear();
+    clearTimeout(this.tokenTimer);
+    this.router.navigate(['/auth/login']);
+    this.toastService.toastSuccess('You\'ve successfully logged out');
   }
 
 

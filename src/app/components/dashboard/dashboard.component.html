@@ -1,47 +1,87 @@
-<div class="container-fluid">
-  <div class="four-space"></div>
-  <div class="row d-flex justify-content-around">
-    <div class="col-md-3">
-      <div class="card card-stats">
-        <div class="card-header card-header-icon card-header-success">
-          <div class="card-icon">
-            <i class="material-icons">store</i>
+<section class="section">
+  <div class="container-fluid">
+    <div class="four-space"></div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-md-3">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-info">
+            <div class="card-icon">
+              <i class="material-icons">turned_in</i>
+            </div>
+            <p class="card-category">Total Cases</p>
+            <h1 class="card-title">{{ leadsLength }}</h1>
           </div>
-          <p class="card-category">Total Companies</p>
-          <h1 class="card-title">86</h1>
+          <div class="card-footer">
+            Total cases submitted by you
+          </div>
         </div>
-        <div class="card-footer">
-          In Last Month
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-warning">
+            <div class="card-icon">
+              <i class="material-icons">today</i>
+            </div>
+            <p class="card-category">Pending Cases</p>
+            <h1 class="card-title">{{ pendingLength }}</h1>
+          </div>
+          <div class="card-footer">
+            Cases that are yet to be accept/reject
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="material-icons">verified_user</i>
+            </div>
+            <p class="card-category">Accepted Cases</p>
+            <h1 class="card-title">{{ acceptedLength }}</h1>
+          </div>
+          <div class="card-footer">
+            Cases that we're on a mission to solve
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-danger">
+            <div class="card-icon">
+              <i class="material-icons">warning</i>
+            </div>
+            <p class="card-category">Rejected Cases</p>
+            <h1 class="card-title">{{ rejectedLength }}</h1>
+          </div>
+          <div class="card-footer">
+            Cases that has no scope
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card card-stats">
-        <div class="card-header card-header-icon card-header-success">
-          <div class="card-icon">
-            <i class="material-icons">store</i>
+    <div class="two-space"></div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-7 col-xs-10">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-primary">
+            <div class="card-icon">
+              <i class="material-icons">code</i>
+            </div>
+            <h2 class="card-title">One Click Integration</h2>
+            <p class="card-category" style="color: black;">Copy and paste the below code to your website to integrate by
+              just one button</p>
           </div>
-          <p class="card-category">Total Companies</p>
-          <h1 class="card-title">86</h1>
-        </div>
-        <div class="card-footer">
-          In Last Month
+          <div class="space"></div>
+          <div class="card-body">
+            <!-- <pre>
+              <code>{{ button }}</code>
+            </pre> -->
+            <code>{{ button }}</code>
+          </div>
+          <div class="space"></div>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card card-stats">
-        <div class="card-header card-header-icon card-header-success">
-          <div class="card-icon">
-            <i class="material-icons">store</i>
-          </div>
-          <p class="card-category">Total Companies</p>
-          <h1 class="card-title">86</h1>
-        </div>
-        <div class="card-footer">
-          In Last Month
-        </div>
-      </div>
-    </div>
+    <div class="three-space"></div>
   </div>
-</div>
+</section>

@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { LeadModule } from './lead/lead.module';
 import { ErrorInterceptor } from './auth/error.interceptor';
+import { DocModalComponent } from './lead/doc-modal/doc-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { ErrorInterceptor } from './auth/error.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  entryComponents: [
+    DocModalComponent
   ],
   bootstrap: [AppComponent],
 })

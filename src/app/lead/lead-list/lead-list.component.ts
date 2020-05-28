@@ -19,7 +19,7 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) tablePaginator: MatPaginator;
 
-  columnsToDisplay = ['id', 'name', 'mobile', 'status', 'policy type', 'complaint type'];
+  columnsToDisplay = ['id', 'name', 'mobile', 'status', 'policy type', 'complaint type', 'actions'];
 
   pageSizeOptions = [2, 5, 10];
   pageLength;
@@ -35,9 +35,9 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.getLeadsCount();
     this.getLeads();
     this.allLeads.paginator = this.tablePaginator;
-    this.getLeadsCount();
   }
 
   ngAfterViewInit() {
@@ -59,7 +59,6 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((response) => {
         this.allLeadsCount = response.data;
         this.pageLength = this.allLeadsCount;
-        console.log(this.pageLength);
       }, (error) => {
         console.log(error.error);
       });

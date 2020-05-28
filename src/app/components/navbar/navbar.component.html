@@ -56,8 +56,9 @@
     </div> -->
 
     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-      <button class="name-button" mat-stroked-button>
-        <i class="material-icons">person</i> {{ name }}
+      <button class="name-button" matTooltip="Logout" type="button" (click)="logout()" mat-stroked-button>
+        {{ name }} &nbsp;
+        <i class="material-icons">logout</i>
       </button>
     </div>
   </div>

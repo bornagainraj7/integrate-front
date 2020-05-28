@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://api.insurancesamadhan.com/api/v1'
+  baseUrl: 'http://api.insurancesamadhan.com',
+  url: 'http://integrate.insurancesamadhan.com',
 };

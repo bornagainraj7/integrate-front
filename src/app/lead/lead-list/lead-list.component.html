@@ -10,9 +10,9 @@
           </div>
           <div class="card-body">
             <div class="space"></div>
-            <div class="table-responsive table-full-width">
+            <div class="table-responsive table-full-width" *ngIf="allLeadsCount > 0">
               <mat-table class="table " matSort (matSortChange)="sortData($event)" [dataSource]="allLeads"
-                *ngIf="allLeads.data">
+                *ngIf="allLeads.data != undefined || allLeads.data != null || allLeads.data">
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
                   <mat-cell *matCellDef="let element">{{ element.leadId }}</mat-cell>
@@ -43,8 +43,20 @@
                   <mat-cell *matCellDef="let element">{{ element.complaintTypeId.name }}</mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="text-center">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="d-flex justify-content-center">
+                    <button mat-icon-button type="button" color="primary" matTooltip="Upload Documents"
+                      [routerLink]="['/portal/lead/docs', element._id]" routerLinkActive="active">
+                      <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
                 <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+
               </mat-table>
 
               <div class="paginator" *ngIf="allLeads.data">
@@ -53,9 +65,10 @@
               </div>
 
             </div>
-            <div class="no-case d-flex justify-content-center" *ngIf="!allLeads.data">
+            <div class="no-case d-flex justify-content-center" *ngIf="allLeadsCount < 1">
               <h2>It seems that we don't have any case submitted by you.</h2>
             </div>
+
           </div>
         </div>
       </div>

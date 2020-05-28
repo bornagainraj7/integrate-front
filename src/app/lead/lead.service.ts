@@ -11,10 +11,10 @@ import { Subject } from 'rxjs';
 })
 export class LeadService {
 
-  private baseUrl = `${environment.baseUrl}/lead`;
-  private insUrl = `${environment.baseUrl}/ins-comp`;
-  private compUrl = `${environment.baseUrl}/com-type`;
-  private policyUrl = `${environment.baseUrl}/policy-type`;
+  private baseUrl = `${environment.baseUrl}/api/v1/lead`;
+  private insUrl = `${environment.baseUrl}/api/v1/ins-comp`;
+  private compUrl = `${environment.baseUrl}/api/v1/com-type`;
+  private policyUrl = `${environment.baseUrl}/api/v1/policy-type`;
 
   private allUserLeads: [];
   private allInsCompanies: [];
@@ -129,6 +129,11 @@ export class LeadService {
   }
 
 
+  fetchSingleLead(leadId) {
+    return this.http.get<ResponseData>(`${this.baseUrl}/single/${leadId}`);
+  }
+
+
   submitLead(leadData) {
     this.http.post<ResponseData>(`${this.baseUrl}/new`, leadData)
       .subscribe((response) => {
@@ -138,6 +143,19 @@ export class LeadService {
         }
       }, (error) => {
         console.log(error.error);
+      });
+  }
+
+  updateLeadDocs(leadId, leadDocs) {
+    this.http.put<ResponseData>(`${this.baseUrl}/update/docs/${leadId}`, leadDocs)
+      .subscribe((response) => {
+        if (!response.error) {
+          this.toast.toastSuccess(response.message);
+          this.router.navigate([`/portal/lead/docs/${leadId}`]);
+        }
+      }, (error) => {
+        console.log(error.error);
+        this.toast.toastError(error.error.message);
       });
   }
 }
