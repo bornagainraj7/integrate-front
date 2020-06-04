@@ -52,6 +52,48 @@
                 <mat-error>Mobile number should be 10 characters long</mat-error>
               </mat-form-field>
             </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Company Name</mat-label>
+                <input matInput type="text" name="companyName" ngModel #companyName="ngModel"
+                  placeholder="Your Company Name" required>
+                <mat-error>Company Name is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Website URL</mat-label>
+                <input matInput type="text" name="website" ngModel #website="ngModel"
+                  placeholder="Enter your website url (with http/https)">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Nature Of Business</mat-label>
+                <input matInput type="text" name="natureOfBusiness" ngModel #natureOfBusiness="ngModel"
+                  placeholder="What kind of business you do" required>
+                <mat-error>Nature Of Business is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Area of Operations</mat-label>
+                <mat-select multiple name="areaOfOperation" ngModel #areaOfOperation="ngModel"
+                  placeholder="What kind of business you do" required>
+                  <mat-select-trigger>
+                    {{areaOfOperation.value ? areaOfOperation.value[0] : ''}}
+                    <span *ngIf="areaOfOperation.value?.length > 1" class="example-additional-selection">
+                      (+{{areaOfOperation.value.length - 1}}
+                      {{areaOfOperation.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+                  <mat-optgroup *ngFor="let stateGroup of stateList" [label]="stateGroup.name">
+                    <mat-option *ngFor="let state of stateGroup.states" [value]="state">{{ state }}</mat-option>
+                  </mat-optgroup>
+                </mat-select>
+                <mat-error>Area Of Operation is required</mat-error>
+              </mat-form-field>
+            </div>
             <div class="form-group d-flex justify-content-end">
               <a routerLink="/auth/login">Already have an account</a>
             </div>

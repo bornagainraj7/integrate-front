@@ -1,0 +1,102 @@
+<section class="section">
+  <div class="three-space"></div>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-10 col-sm-12 col-mx-auto">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h2>CONTRACT TERMS</h2>
+            <p class="card-category">Please check below and submit the contract to proceed.</p>
+          </div>
+          <div class="card-body">
+            <h2>Agreement Terms &amp; Conditions</h2>
+            <hr>
+            <div class="policies">
+              <ul>
+                <li>
+                  I in the capacity of the “Vendor” would be representing Fastsurance Consultants Pvt Ltd (Insurance
+                  Samadhan/Company)
+                  for enrolling its prospective customers who are experiencing misselling, fraud and claim rejection.
+                </li>
+                <br>
+                <li>
+                  The Company hereby agrees and undertakes to pay 50% of the aggregate amount received from the
+                  customers/clients
+                  to the Vendor after the deduction (TDS). The Company hereby agrees and undertakes to pay for the
+                  actual incidental
+                  expenses on the services redeemed by the Vendor on a pre-agreed basis. The compensation shall be paid
+                  in terms of
+                  the mutual agreement between the Parties post the successful completion of work. The mode of payment
+                  shall be through
+                  money transfer once the company receives the credit from the customer.
+                </li>
+                <br>
+                <li>
+                  I agree to defend, indemnify and hold harmless the company and its directors, officers, and employees
+                  with
+                  respect to a claim arising from each other’s actual or alleged act, failure to act, error, or omission
+                  in
+                  the performance of the obligations or any governing law or regulation.
+                </li>
+                <br>
+                <li>
+                  I agree not to (i) engage in any activities that may interfere with or in any manner hinder the
+                  performance
+                  of his advisory obligations in any material respect or which presents a conflict of interest; or
+                  (ii) knowingly do or permit to be done anything that causes prejudice, loss or injury to the Company.
+                </li>
+                <br>
+                <li>
+                  Any dispute, difference, controversy arising relating to the interpretation of this agreement shall be
+                  settled by as per mutual consent. If the parties are unable to resolve the dispute within thirty (30)
+                  days from the date of the letter calling for such negotiation by the parties, then either Party
+                  may refer such dispute to arbitration. Such Arbitration shall be conducted. In accordance with
+                  Arbitration and Conciliation Act, 1996. The seat of arbitration shall be New Delhi and the language
+                  shall be in English. Nothing in this agreement is intended to or shall operate to create a
+                  partnership between the Parties, or authorise either Party to act as agent for the other,
+                  and neither party shall have the authority to act in the name or on behalf of or otherwise
+                  to bind the other in any way (including, but not limited to, the making of any representation
+                  or warranty, the assumption of any obligation or liability and the exercise of any right or power).
+                </li>
+                <br>
+                <li>
+                  This document constitutes the complete agreement and sets forth the entire understanding and agreement
+                  of the parties as to the subject matter of this agreement and supersedes all prior discussions
+                  and negotiations or business dealing, customary practice evolved any previous business between
+                  them and the parties shall not be bound by any conditions, definitions, warranties, representations
+                  and negotiations whether oral or written or made earlier to executions of this agreement.
+                </li>
+                <br>
+                <li>
+                  The courts at Delhi only shall have jurisdiction to try and adjudicate all suits actions and
+                  proceedings arising out of this agreement the cost of which shall be entirely borne by the Vendor.
+                </li>
+                <br>
+              </ul>
+              Note: The above terms may change by time without prior notice.
+              <br>
+              *Disclaimer: Your details may be used by Insurance Samadhan for promotion on it's various platforms.
+            </div>
+            <hr>
+            <form #agreeForm="ngForm" (submit)="onSubmit(agreeForm)" *ngIf="userData && !userData.isAgreed">
+              <div class="form-group">
+                <mat-checkbox name="isAgreed" #isAgreed="ngModel" ngModel required>
+                  I agree to all of the above terms and conditions
+                </mat-checkbox>
+              </div>
+              <button mat-raised-button type="submit" class="btn-success"
+                [disabled]="agreeForm.invalid || disableForm">Submit</button>
+            </form>
+            <div class="sign" *ngIf="userData && userData.isAgreed">
+              <p class="text-success signed">SUCCESSFULLY SIGNED</p>
+              <p class="signed-on">Signed on: {{ userData.agreedOn | date: 'fullDate' }}
+                {{ userData.agreedOn | date: 'shortTime' }}</p>
+            </div>
+            <div class="space"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="two-space"></div>
+</section>

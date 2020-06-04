@@ -13,6 +13,7 @@ import { ToastMessageService } from '../toastr.service';
 export class AuthService {
 
   private baseUrl = `${environment.baseUrl}/api/v1/auth`;
+  private userUrl = `${environment.baseUrl}/api/v1/user`;
 
   private token;
   private userId;
@@ -45,6 +46,11 @@ export class AuthService {
   getName() {
     return this.name;
   }
+
+  getUserId() {
+    return this.userId;
+  }
+
 
   private setAuthTimer(duration) {
     const rem = (duration * 1000) - 2147483647;
@@ -199,6 +205,5 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
     this.toastService.toastSuccess('You\'ve successfully logged out');
   }
-
 
 }

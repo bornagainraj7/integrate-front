@@ -26,7 +26,6 @@ export class VerifyComponent implements OnInit {
 
     if (this.token) {
       this.authService.verifyUser(this.token);
-    } else {
       this.router.navigate(['/auth/login']);
     }
   }

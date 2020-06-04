@@ -27,8 +27,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   pendingLength = 0;
   acceptedLength = 0;
   rejectedLength = 0;
+  userId;
 
-  url = `${environment.url}/lead/create`;
+  url;
   button;
 
   constructor(
@@ -38,6 +39,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.userId = this.authService.getUserId();
+    this.url = `${environment.url}/create/new/lead/${this.userId}`;
     this.button = `<a type="button" target="_blank" class="btn btn-primary" href="${this.url}">Add New Lead</a>`;
 
     this.isAuthenticated = this.authService.getIsAuth();

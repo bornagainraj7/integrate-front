@@ -1,0 +1,177 @@
+<section class="section">
+  <div class="four-space"></div>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body" *ngIf="userData">
+            <div class="box-1">
+              <h4 class="card-title">Profile</h4>
+              <p class="card-category"> User Profile Details</p>
+
+              <div class="box-1-img">
+                <input type="file" (change)="onDpChange($event)" name="profile_pic" id="fileField" />
+                <div *ngIf="userData.profilePic else ElsePartImg">
+                  <img src="{{url}}/uploads/{{ userData._id }}/{{userData.profilePic}}" width="300" height="300" />
+                </div>
+                <ng-template #ElsePartImg>
+                  <img src="../../assets/img/logo.jpg" width="300" height="300" />
+                </ng-template>
+                <img class="img-edit" src="../../assets/img/edit.png" style="width:36px; background: none; height:36px; position:absolute;
+                  right:15px; bottom:15px; border:0; cursor: pointer;">
+              </div>
+            </div>
+
+            <div class="four-space"></div>
+            <div class="three-space"></div>
+            <div class="row d-flex justify-content-around">
+              <h3 class="name">
+                {{ userData.name }}
+              </h3>
+              <h3 class="name">{{ userData.userName }}</h3>
+            </div>
+            <div class="space"></div>
+            <form #userForm="ngForm" (submit)="updateUser(userForm)">
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-sm-10">
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Email Id: </mat-label>
+                          <input matInput type="email" name="email" #email="ngModel" ngModel
+                            [(ngModel)]="userData.email" readonly placeholder="email">
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Mobile Number: </mat-label>
+                          <input matInput type="number" name="mobile" #mobile="ngModel" ngModel
+                            [(ngModel)]="userData.mobile" readonly placeholder="email">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Date Of Birth: </mat-label>
+                          <input matInput [matDatepicker]="dobPicker" name="dob" #dob="ngModel" ngModel
+                            [(ngModel)]="userData.dob" [max]="maxDate" (dateChange)="onDobChange($event)"
+                            placeholder="Pick a date" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                          <mat-datepicker #dobPicker startView="multi-year"></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Age: </mat-label>
+                          <input matInput type="number" name="age" #age="ngModel" ngModel min="18" max="99"
+                            [(ngModel)]="userData.age" placeholder="Age">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>PAN Number: </mat-label>
+                          <input matInput type="text" name="panNumber" #panNumber="ngModel" ngModel
+                            [(ngModel)]="userData.panNumber" (change)='onPanCardChange(panNumber)' maxlength="10"
+                            placeholder="Pan Card Number" required>
+                          <mat-error>Pan Number is required</mat-error>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Aadhaar Number: </mat-label>
+                          <input matInput type="text" name="aadhaarNumber" #aadhaarNumber="ngModel" ngModel
+                            [(ngModel)]="userData.aadhaarNumber" (keypress)="keyPress($event)" maxlength="12"
+                            placeholder="Aadhaar Card Number" required>
+                          <mat-error>Aadhaar Number is required</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-10">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Joined On: </mat-label>
+                          <input matInput name="createdAt" #createdAt="ngModel" ngModel [(ngModel)]="userData.createdAt"
+                            readonly placeholder="Joined Us">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Gender: </mat-label>
+                          <mat-select name="policyTypeId" ngModel [(ngModel)]="userData.gender"
+                            #policyTypeInput="ngModel">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Your Company: </mat-label>
+                          <input matInput type="text" name="companyName" #companyName="ngModel" ngModel
+                            [(ngModel)]="userData.companyName" placeholder="Tell us your company name">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Website URL: </mat-label>
+                          <input matInput type="text" name="website" #website="ngModel" ngModel
+                            [(ngModel)]="userData.website" placeholder="Enter your website url (with http/https)">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>About: </mat-label>
+                      <textarea matInput cols="30" rows="3" name="about" #about="ngModel" ngModel
+                        [(ngModel)]="userData.about" placeholder="Tell us something about yourself"></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <button mat-raised-button color="primary" type="submit">Update Profile</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="three-space"></div>
+</section>

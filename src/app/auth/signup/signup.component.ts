@@ -14,6 +14,54 @@ export class SignupComponent implements OnInit {
   isAuthenticated;
   authStatusSubs: Subscription;
 
+  stateList = [
+    {
+      name: 'All India',
+      states: ['Pan India']
+    },
+    {
+      name: 'States and Union Territories',
+      states: [
+        'Andaman & Nicobar',
+        'Andhra Pradesh',
+        'Arunachal Pradesh',
+        'Assam',
+        'Bihar',
+        'Chandigarh',
+        'Chhattisgarh',
+        'Dadra and Nagar Haveli',
+        'Daman & Diu',
+        'Delhi',
+        'Goa',
+        'Gujarat',
+        'Haryana',
+        'Himachal Pradesh',
+        'Jammu & Kashmir',
+        'Jharkhand',
+        'Karnataka',
+        'Kerala',
+        'Lakshadweep',
+        'Ladakh',
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Manipur',
+        'Meghalaya',
+        'Mizoram',
+        'Nagaland',
+        'Odisha',
+        'Puducherry',
+        'Punjab',
+        'Rajasthan',
+        'Sikkim',
+        'Tamil Nadu',
+        'Tripura',
+        'Uttarakhand',
+        'Uttar Pradesh',
+        'West Bengal',
+      ],
+    },
+  ];
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {

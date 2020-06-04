@@ -5,10 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { VerifyComponent } from './verify/verify.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthRouterModule } from './auth-router/auth-router.module';
+import { ProfileComponent } from '../user/profile/profile.component';
 
 
 @NgModule({
-  declarations: [SignupComponent, LoginComponent, VerifyComponent],
+  declarations: [
+    SignupComponent,
+    LoginComponent,
+    VerifyComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,

@@ -6,6 +6,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 const route: Routes = [
   { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
   { path: 'lead', loadChildren: '../../lead/lead.module#LeadModule', },
+  { path: 'user', loadChildren: 'src/app/user/user.module#UserModule' },
 ];
 
 @NgModule({

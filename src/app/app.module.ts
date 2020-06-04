@@ -14,6 +14,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { LeadModule } from './lead/lead.module';
 import { ErrorInterceptor } from './auth/error.interceptor';
 import { DocModalComponent } from './lead/doc-modal/doc-modal.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DocModalComponent } from './lead/doc-modal/doc-modal.component';
     SharedModule,
     AuthModule,
     LeadModule,
+    UserModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
