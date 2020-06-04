@@ -4,6 +4,10 @@ import { Subscription } from 'rxjs';
 import { MatTableDataSource, } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { DocsComponent } from '../docs/docs.component';
+import { ToastMessageService } from 'src/app/toastr.service';
+import { ComModalComponent } from '../com-modal/com-modal.component';
 
 @Component({
   selector: 'app-lead-list',
@@ -15,13 +19,26 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
   public allLeads = new MatTableDataSource<any>();
   public leadSubs: Subscription;
 
+  docsModalRef;
+  comModalRef;
+
+  modalOptions = {
+    disableClose: true,
+  };
+
+  comModalOptions = {
+    disableClose: true,
+    width: '600px',
+    // height: '700px',
+  };
+
   @ViewChild(MatSort) sortingTable: MatSort;
 
   @ViewChild(MatPaginator) tablePaginator: MatPaginator;
 
   columnsToDisplay = ['id', 'name', 'mobile', 'status', 'policy type', 'complaint type', 'actions'];
 
-  pageSizeOptions = [2, 5, 10];
+  pageSizeOptions = [5, 10, 20];
   pageLength;
   pageSize = 10;
   pageNumber = 0;
@@ -31,7 +48,9 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
   unSortedData;
 
   constructor(
-    private leadService: LeadService
+    private leadService: LeadService,
+    private toast: ToastMessageService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -95,6 +114,30 @@ export class LeadListComponent implements OnInit, AfterViewInit, OnDestroy {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
+
+  openDocsModal(lead) {
+    this.docsModalRef = this.dialog.open(DocsComponent, this.modalOptions);
+    this.docsModalRef.componentInstance.leadId = lead._id;
+  }
+
+  openComModal(lead) {
+    this.comModalRef = this.dialog.open(ComModalComponent, this.comModalOptions);
+    this.comModalRef.componentInstance.leadId = lead._id;
+  }
+
+  doFilter(filter) {
+    filter = filter.trim().toLowerCase();
+    this.allLeads.filter = filter;
+    // this.leadService.getFilteredLeads(filter, this.pageNumber, this.pageSize)
+    //   .subscribe((response) => {
+    //     if (!response.error) {
+    //       this.allLeads.data = response.data;
+    //     }
+    //   }, (error) => {
+    //     console.log(error.error);
+    //     this.toast.toastError(error.error.message);
+    //   });
+  }
 
   ngOnDestroy() {
     this.leadSubs.unsubscribe();

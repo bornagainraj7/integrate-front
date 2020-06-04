@@ -19,7 +19,6 @@ export class LeadService {
   private allUserLeads: [];
   private allInsCompanies: [];
   private allPolicyTypes: [];
-  private allComplaintTypes: [];
 
   private usersLeadsList = new Subject<any[]>();
   private insCompaniesList = new Subject<any[]>();
@@ -46,9 +45,6 @@ export class LeadService {
     return this.allPolicyTypes;
   }
 
-  getAllComplaintTypes() {
-    return this.allComplaintTypes;
-  }
 
   getUpdatedInsCompaniesListener() {
     return this.insCompaniesList.asObservable();
@@ -95,18 +91,8 @@ export class LeadService {
       });
   }
 
-  fetchAllComplaintTypes() {
-    this.http.get<ResponseData>(`${this.compUrl}/getall`)
-      .subscribe((response) => {
-        if (!response.error) {
-          this.allComplaintTypes = response.data;
-          this.complaintTypesList.next([...this.allComplaintTypes]);
-        } else {
-          this.complaintTypesList.next(null);
-        }
-      }, (error) => {
-        console.log(error.error);
-      });
+  fetchComplaintTypes(policyId) {
+    return this.http.get<ResponseData>(`${this.compUrl}/get/${policyId}`);
   }
 
   fetchAllUserLeads(page, size) {
@@ -146,12 +132,34 @@ export class LeadService {
       });
   }
 
+  leadWithoutToken(leadData, userId) {
+    return this.http.post<ResponseData>(`${this.baseUrl}/create/new/${userId}`, leadData);
+  }
+
   updateLeadDocs(leadId, leadDocs) {
     this.http.put<ResponseData>(`${this.baseUrl}/update/docs/${leadId}`, leadDocs)
       .subscribe((response) => {
         if (!response.error) {
           this.toast.toastSuccess(response.message);
-          this.router.navigate([`/portal/lead/docs/${leadId}`]);
+          // this.router.navigate([`/portal/lead/docs/${leadId}`]);
+        }
+      }, (error) => {
+        console.log(error.error);
+        this.toast.toastError(error.error.message);
+      });
+  }
+
+  getFilteredLeads(search, page, size) {
+    return this.http.get<ResponseData>(`${this.baseUrl}/filter?search=${search}&page=${page}&size=${size}`);
+  }
+
+  addComment(leadId, comData) {
+    this.http.put<ResponseData>(`${this.baseUrl}/comment/add/${leadId}`, comData)
+      .subscribe((response) => {
+        if (!response.error) {
+          this.toast.toastSuccess(response.message);
+        } else {
+          this.toast.toastError(response.message);
         }
       }, (error) => {
         console.log(error.error);

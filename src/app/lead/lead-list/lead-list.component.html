@@ -10,6 +10,15 @@
           </div>
           <div class="card-body">
             <div class="space"></div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-10 col-sm-12 col-mx-auto">
+                <mat-form-field appearance="outline" *ngIf="allLeadsCount > 0">
+                  <mat-label>Search...</mat-label>
+                  <input matInput type="text" (keydown)="doFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="space"></div>
             <div class="table-responsive table-full-width" *ngIf="allLeadsCount > 0">
               <mat-table class="table " matSort (matSortChange)="sortData($event)" [dataSource]="allLeads"
                 *ngIf="allLeads.data != undefined || allLeads.data != null || allLeads.data">
@@ -44,11 +53,15 @@
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef class="text-center">Actions</mat-header-cell>
-                  <mat-cell *matCellDef="let element" class="d-flex justify-content-center">
+                  <mat-header-cell *matHeaderCellDef class="d-flex justify-content-center">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="d-flex justify-content-around">
                     <button mat-icon-button type="button" color="primary" matTooltip="Upload Documents"
-                      [routerLink]="['/portal/lead/docs', element._id]" routerLinkActive="active">
+                      (click)="openDocsModal(element)" routerLinkActive="active">
                       <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                    <button mat-icon-button type="button" color="basic" matTooltip="Add Comment"
+                      (click)="openComModal(element)">
+                      <mat-icon>comment</mat-icon>
                     </button>
                   </mat-cell>
                 </ng-container>

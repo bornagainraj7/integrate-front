@@ -1,0 +1,58 @@
+<section class="section">
+  <div class="container">
+    <div class="row d-flex justify-content-between">
+      <h2 mat-dialog-title>Add Comment</h2>
+      <button mat-button (click)="onClose()" type="button" color="warn">Close</button>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <h4 class="text-center mx-auto" *ngIf="leadData">Comment history for Lead ID: {{ leadData.leadId }}</h4>
+      <hr>
+    </div>
+    <div mat-dialog-content class="mat-typography">
+      <div class="card">
+        <!-- <div class="card-header card-header-info">
+          <h2 class="card-title">Add Comment</h2>
+          <div class="card-category">Add comment or view your commmen history</div>
+        </div> -->
+        <div class="card-body" *ngIf="leadData">
+          <div class="comment" *ngIf="comsArray">
+            <div class="comment-history" *ngFor="let comment of comsArray">
+              <p class="com">{{ comment.comment }}</p>
+              <p class="com-name text-success">- {{ comment.name }}</p>
+              <p class="com-date">{{ comment.com_date | date:'fullDate' }} {{ comment.com_date | date:'shortTime' }}</p>
+              <br>
+            </div>
+          </div>
+          <div class="no-coms" *ngIf="comsArray.length < 1">
+            <div class="space"></div>
+            <h3>No Comments on this lead</h3>
+            <div class="space"></div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+    <div mat-dialog-actions class="row d-flex justify-content-center">
+      <form #commentForm="ngForm" (submit)="onSubmit(commentForm)">
+        <div class="row d-flex justify-content-around">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Comment: </mat-label>
+              <input matInput type="text" name="comment" #comment="ngModel" ngModel minlength="3"
+                placeholder="Your Comment" required>
+              <mat-hint align="end">{{comment.value?.length}}/3</mat-hint>
+              <mat-error>Comment is required</mat-error>
+            </mat-form-field>
+          </div>
+          &nbsp; &nbsp;&nbsp;&nbsp;
+          <div class="form-group">
+            <button mat-raised-button style="margin-top: 2px;" class="btn btn-success btn-lg" type="submit"
+              [disabled]="commentForm.invalid">Add
+              Comment</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+.com-name {
+  font-weight: 300;
+  font-size: 12px;
+  margin-bottom: -5px !important;
+}
+.com-date {
+  font-weight: 300;
+  font-size: 11px;
+}
+.com {
+  font-size: 18px;
+}
+.comment-history p {
+  margin-bottom: 0px;
+}
+.comment-history {
+  margin-top: 15px;
+}

@@ -20,9 +20,10 @@ export class CreateLeadComponent implements OnInit, OnDestroy {
   allInsCompanies;
   isAuthenticated;
 
+  policyId;
+
   public policyTypesSubs;
   public insCompSubs;
-  public complaintTypesSubs;
   public authStatusSubs;
 
   constructor(
@@ -35,7 +36,6 @@ export class CreateLeadComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.leadService.fetchAllComplaintTypes();
     this.leadService.fetchAllPolicyTypes();
     this.leadService.fetchAllInsCompanies();
 
@@ -56,11 +56,6 @@ export class CreateLeadComponent implements OnInit, OnDestroy {
         this.allPolicyTypes = policyTypes;
       });
 
-    this.allComplaintTypes = this.leadService.getAllComplaintTypes();
-    this.complaintTypesSubs = this.leadService.getUpdatedComplaintTypesListener()
-      .subscribe((complaintTypes) => {
-        this.allComplaintTypes = complaintTypes;
-      });
 
     this.allInsCompanies = this.leadService.getAllInsCompanies();
     this.insCompSubs = this.leadService.getUpdatedInsCompaniesListener()
@@ -68,6 +63,19 @@ export class CreateLeadComponent implements OnInit, OnDestroy {
         this.allInsCompanies = insComps;
       });
 
+  }
+
+  onPolicyChange(event) {
+    this.leadService.fetchComplaintTypes(this.policyId)
+      .subscribe((response) => {
+        if (!response.error) {
+          this.allComplaintTypes = response.data;
+        } else {
+          this.allComplaintTypes = null;
+        }
+      }, (error) => {
+        console.log(error.error);
+      });
   }
 
   onCreateLead(form: NgForm) {
@@ -91,6 +99,6 @@ export class CreateLeadComponent implements OnInit, OnDestroy {
     this.authStatusSubs.unsubscribe();
     this.policyTypesSubs.unsubscribe();
     this.insCompSubs.unsubscribe();
-    this.complaintTypesSubs.unsubscribe();
+    // this.complaintTypesSubs.unsubscribe();
   }
 }

@@ -1,17 +1,17 @@
 <section class="section">
   <div class="four-space"></div>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row d-flex justify-content-center">
-      <div class="col-md-8 col-xs-10">
+      <div class="col-md-8 col-sm-12 col-xs-12">
         <div class="card">
-          <div class="card-header card-header-info">
-            <h2 class="card-title">Submit New Case</h2>
+          <div class="card-header card-header-success">
+            <h2 class="card-title">Submit New Lead</h2>
             <p class="card-category">Provide us the details of your new Insurace case you'll like to submit us.</p>
           </div>
           <div class="card-body">
             <div class="space"></div>
 
-            <form (submit)="onCreateLead(newLeadForm)" #newLeadForm="ngForm">
+            <form (submit)="onSubmit(newLeadForm)" #newLeadForm="ngForm">
               <div class="row d-flex justify-content-around">
 
                 <div class="col-md-5 col-xs-10">
@@ -34,16 +34,15 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="form-group" *ngIf="allPolicyTypes">
+                  <div class="form-group" *ngIf="policyTypes">
                     <mat-form-field appearance="outline">
-                      <mat-label>Policy Type: </mat-label>
-                      <mat-select name="policyTypeId" ngModel [(ngModel)]="policyId" #policyTypeInput="ngModel"
-                        (selectionChange)="onPolicyChange($event)" required>
+                      <mat-label>Complaint Type: </mat-label>
+                      <mat-select name="complaintTypeId" ngModel #comTypeInput="ngModel" required>
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let policy of allPolicyTypes" [value]="policy._id">{{ policy.name }}
+                        <mat-option *ngFor="let comp of complaintTypes" [value]="comp._id">{{ comp.name }}
                         </mat-option>
                       </mat-select>
-                      <mat-error *ngIf="policyTypeInput.hasError('required')">Policy type is required
+                      <mat-error *ngIf="comTypeInput.hasError('required')">Complaint type is required
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -61,28 +60,16 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="form-group" *ngIf="allInsCompanies">
+                  <div class="form-group" *ngIf="policyTypes">
                     <mat-form-field appearance="outline">
-                      <mat-label>Insurance Company Name: </mat-label>
-                      <mat-select name="companyId" ngModel #insCompInput="ngModel" required>
+                      <mat-label>Policy Type: </mat-label>
+                      <mat-select name="policyTypeId" ngModel [(ngModel)]="policyTypeId" #policyTypeInput="ngModel"
+                        (selectionChange)="onPolicyChange($event)" required>
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let insComp of allInsCompanies" [value]="insComp._id">{{ insComp.name }}
+                        <mat-option *ngFor="let policy of policyTypes" [value]="policy._id">{{ policy.name }}
                         </mat-option>
                       </mat-select>
-                      <mat-error *ngIf="insCompInput.hasError('required')">Insurance Company Name is required
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-
-                  <div class="form-group" *ngIf="allPolicyTypes">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Complaint Type: </mat-label>
-                      <mat-select name="complaintTypeId" ngModel #comTypeInput="ngModel" required>
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of allComplaintTypes" [value]="comp._id">{{ comp.name }}
-                        </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="comTypeInput.hasError('required')">Complaint type is required
+                      <mat-error *ngIf="policyTypeInput.hasError('required')">Policy type is required
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -90,13 +77,14 @@
                 </div>
               </div>
 
-              <button mat-raised-button type="submit" class="btn-success" [disabled]="newLeadForm.invalid">Submit
-                Case</button>
+              <button mat-raised-button type="submit" class="btn-success"
+                [disabled]="disableForm || newLeadForm.invalid">Submit
+                Lead</button>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="four-space"></div>
+  <div class="three-space"></div>
 </section>
